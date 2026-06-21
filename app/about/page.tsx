@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import { PageHero } from "@/components/PageHero";
 import { Container } from "@/components/Container";
 import { SectionHeading } from "@/components/SectionHeading";
 import { CTASection } from "@/components/CTASection";
 import { Reveal } from "@/components/Reveal";
+import { PortableImage } from "@/components/primitives";
 import { Heart, Compass, Sparkles, ShieldCheck } from "lucide-react";
 
 export const metadata: Metadata = {
@@ -143,12 +143,10 @@ export default function AboutPage() {
               </dl>
             </div>
             <div className="relative aspect-[4/3] overflow-hidden rounded-3xl shadow-soft ring-1 ring-ink/5">
-              <Image
+              <PortableImage
                 src="/images/about-team.webp"
                 alt="Connected map of Europe"
-                fill
-                sizes="(min-width: 768px) 50vw, 100vw"
-                className="object-cover"
+                className="absolute inset-0 h-full w-full object-cover"
               />
             </div>
           </div>

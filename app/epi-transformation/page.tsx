@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import { PageHero } from "@/components/PageHero";
 import { Container } from "@/components/Container";
 import { SectionHeading } from "@/components/SectionHeading";
 import { CTASection } from "@/components/CTASection";
 import { Reveal } from "@/components/Reveal";
+import { PortableImage } from "@/components/primitives";
 import {
   FileText,
   GitBranch,
@@ -33,7 +33,7 @@ const pipeline = [
   {
     icon: Database,
     title: "Enriched & stored",
-    body: "We attach ATC5 classification, pricing, reimbursement and metadata. Stored securely on Azure.",
+    body: "We attach ATC5 classification, structured metadata, language, market and product context. Stored securely on Azure.",
   },
   {
     icon: Globe,
@@ -171,12 +171,10 @@ export default function EpiPage() {
             </Reveal>
             <Reveal delay={0.1}>
               <div className="relative aspect-square overflow-hidden rounded-4xl shadow-soft ring-1 ring-ink/5">
-                <Image
+                <PortableImage
                   src="/images/about-team.webp"
                   alt="Map of Europe with connected nodes"
-                  fill
-                  sizes="(min-width: 768px) 50vw, 100vw"
-                  className="object-cover"
+                  className="absolute inset-0 h-full w-full object-cover"
                 />
               </div>
             </Reveal>

@@ -1,0 +1,49 @@
+# Leaphy
+
+Leaphy is a European digital health technology company helping pharmaceutical organisations prepare for electronic Product Information, ePI.
+
+## Core services
+
+- ePI conversion services
+- AI-supported ePI conversion workflows
+- Word to structured ePI conversion
+- PDF to structured ePI conversion
+- HL7 FHIR-aligned XML output
+- EMA ePI readiness support
+- Quality control support
+- Metadata handling
+- Portfolio-scale ePI conversion
+- Managed ePI services
+- Strategic ePI partnership
+- App and digital medicine information access
+
+## Main audiences
+
+- Pharmaceutical companies
+- Marketing Authorisation Holders
+- Regulatory Affairs teams
+- Labeling Operations teams
+- Digital Transformation teams
+- Regulatory consultancies
+- Healthcare technology partners
+
+## Key pages
+
+- /what-is-epi
+- /ema-epi-readiness
+- /hl7-fhir-epi
+- /epi-conversion-services
+- /portfolio-epi-conversion
+- /epi-for-regulatory-affairs
+- /epi-for-labeling-operations
+- /veeva-rim-epi-integration
+- /app-and-patient-access
+- /contact
+
+## Positioning
+
+Leaphy is not only an app and not only a conversion tool. Leaphy is positioned as a strategic ePI enablement partner supporting compliance readiness, portfolio conversion, operational ePI workflows, future API distribution, resolver services, and interoperability.
+
+## Contact
+
+Companies can contact Leaphy to request an ePI readiness assessment, pilot conversion, portfolio discussion, or strategic partnership conversation.

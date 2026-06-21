@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import { PageHero } from "@/components/PageHero";
 import { Container } from "@/components/Container";
 import { SectionHeading } from "@/components/SectionHeading";
 import { FeatureGrid } from "@/components/FeatureGrid";
 import { CTASection } from "@/components/CTASection";
 import { Reveal } from "@/components/Reveal";
+import { PortableImage } from "@/components/primitives";
 import {
   ScanLine,
   Languages,
@@ -157,12 +157,10 @@ export default function PatientsPage() {
               </p>
             </div>
             <div className="relative aspect-[4/3] overflow-hidden rounded-3xl shadow-soft ring-1 ring-ink/5">
-              <Image
+              <PortableImage
                 src="/images/hero-scan.webp"
                 alt="Phone scanning a medication pack"
-                fill
-                sizes="(min-width: 768px) 50vw, 100vw"
-                className="object-cover"
+                className="absolute inset-0 h-full w-full object-cover"
               />
             </div>
           </div>

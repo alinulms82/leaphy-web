@@ -8,7 +8,7 @@ import {
   Search,
   Layers,
   Tags,
-  Banknote,
+  ClipboardCheck,
   Bell,
   ShieldCheck,
 } from "lucide-react";
@@ -16,7 +16,7 @@ import {
 export const metadata: Metadata = {
   title: "Physicians",
   description:
-    "Up-to-date leaflet data, ATC5 classification, pricing and reimbursement insights at the point of care.",
+    "Up-to-date leaflet data, ATC5 classification, metadata and access context at the point of care.",
 };
 
 export default function PhysiciansPage() {
@@ -60,10 +60,10 @@ export default function PhysiciansPage() {
                     "Standard pharmacological classification on every product, ready for filtering.",
                 },
                 {
-                  icon: Banknote,
-                  title: "Pricing & reimbursement",
+                  icon: ClipboardCheck,
+                  title: "Metadata context",
                   description:
-                    "Local pricing and reimbursement insights enrich every leaflet.",
+                    "Relevant product metadata and access context enrich every leaflet.",
                 },
                 {
                   icon: Bell,

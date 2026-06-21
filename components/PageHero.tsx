@@ -1,8 +1,7 @@
-import Image from "next/image";
-import Link from "next/link";
 import { ReactNode } from "react";
 import { ArrowRight } from "lucide-react";
 import { Container } from "./Container";
+import { PortableImage, PortableLink } from "./primitives";
 
 export function PageHero({
   eyebrow,
@@ -31,22 +30,20 @@ export function PageHero({
           <p className="mt-5 lead max-w-xl">{description}</p>
           {cta && (
             <div className="mt-8">
-              <Link href={cta.href} className="btn-primary">
+              <PortableLink href={cta.href} className="btn-primary">
                 {cta.label}
                 <ArrowRight className="h-4 w-4" />
-              </Link>
+              </PortableLink>
             </div>
           )}
         </div>
         <div className="relative">
           <div className="relative aspect-[5/4] overflow-hidden rounded-4xl shadow-soft ring-1 ring-ink/5">
-            <Image
+            <PortableImage
               src={image}
               alt={imageAlt}
-              fill
-              priority
-              sizes="(min-width: 768px) 50vw, 100vw"
-              className="object-cover"
+              eager
+              className="absolute inset-0 h-full w-full object-cover"
             />
           </div>
           <div className="absolute -bottom-6 -left-6 hidden rounded-2xl bg-white p-3 shadow-soft ring-1 ring-ink/5 md:block">

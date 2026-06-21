@@ -64,6 +64,21 @@ body {
     background-image: var(--tw-bg-grid-fade, theme('backgroundImage.grid-fade'));
     background-size: 22px 22px;
   }
+  .reveal {
+    animation: reveal-up 0.65s cubic-bezier(0.22, 1, 0.36, 1) both;
+    animation-delay: var(--reveal-delay, 0s);
+  }
+}
+
+@keyframes reveal-up {
+  from {
+    opacity: 0;
+    transform: translateY(var(--reveal-y, 16px));
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -74,5 +89,9 @@ body {
     animation-iteration-count: 1 !important;
     transition-duration: 0.001ms !important;
     scroll-behavior: auto !important;
+  }
+
+  .reveal {
+    animation: none !important;
   }
 }

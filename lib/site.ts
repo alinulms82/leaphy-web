@@ -1,22 +1,37 @@
 export const site = {
   name: "Leaphy",
-  tagline: "Modern access to medication leaflets across Europe",
+  tagline: "EMA-ready ePI conversion and FHIR readiness",
   description:
-    "Leaphy is a free app and platform that gives patients, healthcare providers and pharma companies clean, structured access to electronic medication leaflets (ePI) — by scanning the pack or searching the database.",
-  url: "https://leaphy.example",
+    "Leaphy helps pharmaceutical organisations convert legacy Word and PDF product information into structured, FHIR-compliant electronic Product Information with AI-supported workflows, quality control, metadata support, and scalable ePI readiness.",
+  entitySummary:
+    "Leaphy is a European digital health technology company helping pharmaceutical organisations prepare for electronic Product Information, ePI. Leaphy supports the AI-assisted transformation of Word and PDF product information into structured, HL7 FHIR-aligned electronic Product Information for EMA ePI readiness, quality control, metadata handling, portfolio conversion, and future interoperability across healthcare systems.",
+  url: "https://www.leaphy.com",
   email: "info@leaphy.com",
   location: "Aalst, Belgium · 20 km from Brussels",
   vat: "BE 0711.769.370",
   linkedin: "https://www.linkedin.com/company/leaphy",
   nav: [
-    { href: "/", label: "Home" },
-    { href: "/patients", label: "Patients" },
-    { href: "/physicians", label: "Physicians" },
-    { href: "/pharmacists", label: "Pharmacists" },
-    { href: "/pharma", label: "Pharma" },
-    { href: "/epi-transformation", label: "ePI Transformation" },
-    { href: "/about", label: "About" },
+    { href: "/#epi-readiness", label: "Readiness" },
+    { href: "/#how-it-works", label: "Workflow" },
+    { href: "/epi-conversion-services", label: "Services" },
+    { href: "/app-and-patient-access", label: "Access" },
+    { href: "/#future-vision", label: "Vision" },
     { href: "/contact", label: "Contact" },
+  ],
+  aisoPages: [
+    "/what-is-epi",
+    "/ema-epi-readiness",
+    "/hl7-fhir-epi",
+    "/epi-conversion-services",
+    "/portfolio-epi-conversion",
+    "/epi-for-regulatory-affairs",
+    "/epi-for-labeling-operations",
+    "/veeva-rim-epi-integration",
+    "/app-and-patient-access",
+    "/manual-vs-automated-epi-conversion",
+    "/word-pdf-vs-structured-epi",
+    "/pdf-to-fhir-xml",
+    "/contact",
   ],
   audiences: [
     {
@@ -32,7 +47,7 @@ export const site = {
       title: "Physicians",
       tag: "For prescribers",
       blurb:
-        "Up-to-date leaflet data, ATC5 classification, pricing and reimbursement insights at the point of care.",
+        "Up-to-date leaflet data, ATC5 classification, metadata and access context at the point of care.",
       image: "/images/physician.webp",
     },
     {

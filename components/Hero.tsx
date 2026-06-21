@@ -1,14 +1,8 @@
-"use client";
-
-import Image from "next/image";
-import Link from "next/link";
-import { motion, useReducedMotion } from "framer-motion";
 import { ArrowRight, ScanLine, Sparkles } from "lucide-react";
 import { Container } from "./Container";
+import { PortableImage, PortableLink } from "./primitives";
 
 export function Hero() {
-  const reduce = useReducedMotion();
-
   return (
     <section className="relative overflow-hidden">
       <div className="absolute inset-0 bg-mint-sky" aria-hidden />
@@ -27,20 +21,14 @@ export function Hero() {
 
       <Container className="relative grid items-center gap-12 pb-16 pt-12 md:grid-cols-2 md:pb-24 md:pt-20 lg:pt-28">
         <div className="relative">
-          <motion.span
-            initial={{ opacity: 0, y: 8 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
+          <span
             className="chip"
           >
             <Sparkles className="h-3.5 w-3.5" />
             Now in pilot · Belgium · Expanding across the EU
-          </motion.span>
+          </span>
 
-          <motion.h1
-            initial={{ opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.05 }}
+          <h1
             className="mt-5 font-display text-display-1 text-ink"
           >
             The clearest way to read your{" "}
@@ -63,39 +51,30 @@ export function Hero() {
               </svg>
             </span>
             .
-          </motion.h1>
+          </h1>
 
-          <motion.p
-            initial={{ opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.12 }}
+          <p
             className="lead mt-6 max-w-xl"
           >
             Leaphy is a free app for patients and healthcare providers — scan
             the pack, get a structured, multilingual ePI leaflet enriched with
-            pricing, classification and trusted insights.
-          </motion.p>
+            classification, metadata and trusted access context.
+          </p>
 
-          <motion.div
-            initial={{ opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.18 }}
+          <div
             className="mt-8 flex flex-wrap items-center gap-3"
           >
-            <Link href="/patients" className="btn-primary">
+            <PortableLink href="/patients" className="btn-primary">
               <ScanLine className="h-4 w-4" />
               Find your leaflet
-            </Link>
-            <Link href="/pharma" className="btn-secondary">
+            </PortableLink>
+            <PortableLink href="/pharma" className="btn-secondary">
               For pharma teams
               <ArrowRight className="h-4 w-4" />
-            </Link>
-          </motion.div>
+            </PortableLink>
+          </div>
 
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.7, delay: 0.3 }}
+          <div
             className="mt-10 flex items-center gap-4 text-xs text-ink/55"
           >
             <div className="flex -space-x-2">
@@ -108,39 +87,29 @@ export function Hero() {
               ))}
             </div>
             Trusted across the EU pharma chain
-          </motion.div>
+          </div>
         </div>
 
-        <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.9, delay: 0.15 }}
+        <div
           className="relative"
         >
           <div className="relative mx-auto aspect-[4/5] w-full max-w-md overflow-hidden rounded-[2rem] bg-white shadow-soft ring-1 ring-ink/10">
-            <Image
+            <PortableImage
               src="/images/hero-scan.webp"
               alt="Smartphone scanning a medication pack"
-              fill
-              priority
-              sizes="(min-width: 768px) 50vw, 100vw"
-              className="object-cover"
+              eager
+              className="absolute inset-0 h-full w-full object-cover"
             />
-            {!reduce && (
-              <div
-                aria-hidden
-                className="pointer-events-none absolute inset-0 mix-blend-screen"
-              >
-                <div className="absolute left-[28%] top-1/2 h-[120%] w-[44%] -translate-y-1/2 animate-scan bg-[linear-gradient(to_bottom,transparent,rgba(20,255,220,0.55),transparent)]" />
-              </div>
-            )}
+            <div
+              aria-hidden
+              className="pointer-events-none absolute inset-0 mix-blend-screen"
+            >
+              <div className="absolute left-[28%] top-1/2 h-[120%] w-[44%] -translate-y-1/2 animate-scan bg-[linear-gradient(to_bottom,transparent,rgba(20,255,220,0.55),transparent)]" />
+            </div>
           </div>
 
           {/* Floating cards */}
-          <motion.div
-            initial={{ opacity: 0, x: -20, y: -10 }}
-            animate={{ opacity: 1, x: 0, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.5 }}
+          <div
             className="absolute -left-3 top-8 hidden w-56 rounded-2xl bg-white/90 p-3 shadow-soft ring-1 ring-ink/5 backdrop-blur md:block"
           >
             <div className="flex items-center gap-2">
@@ -160,12 +129,9 @@ export function Hero() {
                 </div>
               ))}
             </div>
-          </motion.div>
+          </div>
 
-          <motion.div
-            initial={{ opacity: 0, x: 20, y: 10 }}
-            animate={{ opacity: 1, x: 0, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.65 }}
+          <div
             className="absolute -right-2 bottom-10 hidden w-52 rounded-2xl bg-ink p-3 text-white shadow-glow md:block"
           >
             <p className="text-[10px] uppercase tracking-wider text-white/60">
@@ -182,8 +148,8 @@ export function Hero() {
                 </li>
               ))}
             </ul>
-          </motion.div>
-        </motion.div>
+          </div>
+        </div>
       </Container>
     </section>
   );

@@ -41,14 +41,14 @@ export const metadata: Metadata = {
     images: ["/images/og-image.webp"],
   },
   icons: {
-    icon: "/images/icon-leaf.svg",
+    icon: "/images/leaphy-mark.png",
   },
 };
 
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
-  themeColor: "#ECFDF5",
+  themeColor: "#071B33",
 };
 
 export default function RootLayout({
@@ -71,7 +71,8 @@ export default function RootLayout({
               "@type": "Organization",
               name: site.name,
               url: site.url,
-              logo: `${site.url}/images/icon-leaf.svg`,
+              logo: `${site.url}/images/leaphy-logo.png`,
+              description: site.entitySummary,
               email: site.email,
               address: {
                 "@type": "PostalAddress",
@@ -79,6 +80,22 @@ export default function RootLayout({
                 addressCountry: "BE",
               },
               sameAs: [site.linkedin],
+            }),
+          }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "WebSite",
+              name: site.name,
+              url: site.url,
+              description: site.description,
+              publisher: {
+                "@type": "Organization",
+                name: site.name,
+              },
             }),
           }}
         />

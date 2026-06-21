@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import { PageHero } from "@/components/PageHero";
 import { Container } from "@/components/Container";
 import { SectionHeading } from "@/components/SectionHeading";
 import { FeatureGrid } from "@/components/FeatureGrid";
 import { CTASection } from "@/components/CTASection";
 import { Reveal } from "@/components/Reveal";
+import { PortableImage } from "@/components/primitives";
 import {
   Cloud,
   ShieldCheck,
@@ -104,12 +104,10 @@ export default function PharmaPage() {
           <div className="grid items-center gap-12 md:grid-cols-2">
             <Reveal>
               <div className="relative aspect-[4/3] overflow-hidden rounded-4xl shadow-soft ring-1 ring-ink/5">
-                <Image
+                <PortableImage
                   src="/images/epi-transform.webp"
                   alt="Paper leaflet transforming into structured digital data"
-                  fill
-                  sizes="(min-width: 768px) 50vw, 100vw"
-                  className="object-cover"
+                  className="absolute inset-0 h-full w-full object-cover"
                 />
               </div>
             </Reveal>

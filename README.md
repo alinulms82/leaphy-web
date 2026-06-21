@@ -1,15 +1,15 @@
 # Leaphy — modern marketing site
 
-A clean, mobile-first rebuild of [leaphy.com](https://www.leaphy.com/), the European platform for electronic medication leaflets (ePI). Built with Next.js 14, TypeScript, Tailwind CSS, and Framer Motion. Imagery is AI-generated.
+A clean, mobile-first rebuild of [leaphy.com](https://www.leaphy.com/), the European platform for electronic medication leaflets (ePI). Built with Next.js 14, TypeScript, Tailwind CSS, and WordPress-portable presentation components. Imagery is AI-generated.
 
 ## Stack
 
 - **Next.js 14** (App Router) + **React 18** + **TypeScript**
 - **Tailwind CSS** with custom design tokens (brand teal, indigo accent, mint-sky surfaces)
-- **Framer Motion** for tasteful scroll-reveal animations and the animated hero scan beam
+- CSS-only reveal animations and hero scan beam
 - **lucide-react** icon set
 - `next/font` (Inter for body, Instrument Serif for display headings)
-- `next/image` for optimized AVIF/WebP delivery
+- Portable `<a>` and `<img>` primitives for reusable visual components
 
 ## Pages
 
@@ -29,10 +29,33 @@ A clean, mobile-first rebuild of [leaphy.com](https://www.leaphy.com/), the Euro
 ```
 app/                 # App Router pages and layout
 components/          # Reusable UI primitives (Hero, AudienceCard, …)
+components/primitives.tsx # Portable link/image shims for non-Next renderers
 lib/                 # site config + small utils
 public/images/       # AI-generated imagery + logo SVG
 tailwind.config.ts   # Design tokens
 ```
+
+## WordPress portability
+
+The reusable visual components are intentionally written as plain React markup with small platform shims:
+
+- `components/primitives.tsx` owns links and images. Swap `PortableLink` for WordPress permalinks and `PortableImage` for `wp_get_attachment_image()` or normal `<img>` output.
+- `components/Reveal.tsx` is CSS-only. Port the `.reveal` class and `@keyframes reveal-up` from `app/globals.css`; no animation library is required.
+- `components/Header.tsx` is the only Next route-aware wrapper. The portable header body lives in `components/HeaderView.tsx` and accepts `currentPath`, which maps cleanly to WordPress’s current URL or menu item state.
+- Shared content lives in `lib/site.ts`. In WordPress, this can become ACF fields, block attributes, a JSON config, or theme options.
+- Icons currently use `lucide-react`; for WordPress, inline the generated SVGs or use the Lucide static SVG package during the theme build.
+
+Recommended block/partial mapping:
+
+| Component | WordPress equivalent |
+| --------- | -------------------- |
+| `Hero` | homepage hero block |
+| `PageHero` | reusable page hero block |
+| `AudienceCard` | card pattern inside an audience grid block |
+| `FeatureGrid` | repeater/block with icon, title, body fields |
+| `CTASection` | reusable CTA block |
+| `HeaderView` / `Footer` | theme partials |
+| `ContactForm` / `NewsletterForm` | replace UI-only submit handlers with CF7, Gravity Forms, or custom AJAX |
 
 ## Local development
 

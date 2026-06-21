@@ -1,35 +1,55 @@
-import Link from "next/link";
+"use client";
+
+import { Suspense } from "react";
+import { useSearchParams } from "next/navigation";
 import { Linkedin, Mail, MapPin } from "lucide-react";
 import { Container } from "./Container";
 import { Logo } from "./Logo";
 import { NewsletterForm } from "./NewsletterForm";
 import { site } from "@/lib/site";
+import { PortableLink } from "./primitives";
+import { getLocale } from "@/lib/i18n";
 
 export function Footer() {
+  return (
+    <Suspense fallback={<FooterContent locale="en" />}>
+      <FooterWithLocale />
+    </Suspense>
+  );
+}
+
+function FooterWithLocale() {
+  const searchParams = useSearchParams();
+  return <FooterContent locale={getLocale(searchParams.get("lang"))} />;
+}
+
+function FooterContent({ locale }: { locale: "en" | "nl" | "fr" | "de" }) {
+  const labels = footerLabels[locale];
   const cols = [
     {
-      title: "Audiences",
+      title: labels.services,
       links: [
-        { href: "/patients", label: "Patients" },
-        { href: "/physicians", label: "Physicians" },
-        { href: "/pharmacists", label: "Pharmacists" },
-        { href: "/pharma", label: "Pharma" },
+        { href: "/epi-conversion-services", label: labels.conversion },
+        { href: "/portfolio-epi-conversion", label: labels.portfolio },
+        { href: "/epi-for-regulatory-affairs", label: labels.ra },
+        { href: "/epi-for-labeling-operations", label: labels.labeling },
       ],
     },
     {
-      title: "Platform",
+      title: labels.hub,
       links: [
-        { href: "/epi-transformation", label: "ePI Transformation" },
-        { href: "/about", label: "About" },
-        { href: "/contact", label: "Contact" },
+        { href: "/what-is-epi", label: labels.what },
+        { href: "/ema-epi-readiness", label: labels.ema },
+        { href: "/hl7-fhir-epi", label: labels.fhir },
+        { href: "/veeva-rim-epi-integration", label: labels.rim },
       ],
     },
     {
-      title: "Legal",
+      title: labels.legal,
       links: [
-        { href: "/contact", label: "Disclaimer" },
-        { href: "/contact", label: "Privacy Policy" },
-        { href: "/contact", label: "Cookie Settings" },
+        { href: "/contact", label: labels.disclaimer },
+        { href: "/contact", label: labels.privacy },
+        { href: "/contact", label: labels.cookies },
       ],
     },
   ];
@@ -37,15 +57,14 @@ export function Footer() {
   return (
     <footer className="relative mt-24 overflow-hidden bg-ink text-white">
       <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/20 to-transparent" />
-      <div className="pointer-events-none absolute -left-32 top-0 h-72 w-72 rounded-full bg-brand-500/30 blur-3xl" />
-      <div className="pointer-events-none absolute -right-32 bottom-0 h-72 w-72 rounded-full bg-accent-500/30 blur-3xl" />
 
       <Container className="relative grid gap-12 py-16 md:grid-cols-12 md:py-20">
         <div className="md:col-span-5">
-          <Logo />
+          <div className="inline-flex rounded-lg bg-white px-3 py-2">
+            <Logo />
+          </div>
           <p className="mt-5 max-w-sm text-sm leading-relaxed text-white/70">
-            Leaphy makes electronic medication leaflets accessible, structured
-            and trustworthy — for everyone in the European healthcare chain.
+            {site.entitySummary}
           </p>
 
           <div className="mt-6 space-y-3 text-sm text-white/70">
@@ -82,12 +101,12 @@ export function Footer() {
             <ul className="mt-4 space-y-2.5 text-sm text-white/80">
               {col.links.map((link) => (
                 <li key={link.label}>
-                  <Link
+                  <PortableLink
                     href={link.href}
                     className="transition hover:text-white"
                   >
                     {link.label}
-                  </Link>
+                  </PortableLink>
                 </li>
               ))}
             </ul>
@@ -99,20 +118,95 @@ export function Footer() {
             Newsletter
           </h3>
           <p className="mt-4 text-sm text-white/70">
-            Get the latest from Leaphy on ePI in Europe.
+            {labels.newsletterBody}
           </p>
           <div className="mt-4">
-            <NewsletterForm dark />
+            <NewsletterForm dark locale={locale} />
           </div>
         </div>
       </Container>
 
       <div className="relative border-t border-white/10">
         <Container className="flex flex-col items-start justify-between gap-3 py-6 text-xs text-white/50 sm:flex-row sm:items-center">
-          <span>© {new Date().getFullYear()} Leaphy Europe. All rights reserved.</span>
+          <span>© {new Date().getFullYear()} Leaphy Europe. {labels.rights}</span>
           <span>VAT {site.vat}</span>
         </Container>
       </div>
     </footer>
   );
 }
+
+const footerLabels = {
+  en: {
+    services: "Pharma services",
+    conversion: "ePI conversion services",
+    portfolio: "Portfolio conversion",
+    ra: "Regulatory Affairs",
+    labeling: "Labeling Operations",
+    hub: "ePI Knowledge Hub",
+    what: "What is ePI?",
+    ema: "EMA ePI readiness",
+    fhir: "HL7 FHIR for ePI",
+    rim: "Veeva and RIM integration readiness",
+    legal: "Legal",
+    disclaimer: "Disclaimer",
+    privacy: "Privacy Policy",
+    cookies: "Cookie Settings",
+    newsletterBody: "Get the latest from Leaphy on ePI in Europe.",
+    rights: "All rights reserved.",
+  },
+  nl: {
+    services: "Pharma-diensten",
+    conversion: "ePI-conversiediensten",
+    portfolio: "Portfolioconversie",
+    ra: "Regulatory Affairs",
+    labeling: "Labeling Operations",
+    hub: "ePI Knowledge Hub",
+    what: "Wat is ePI?",
+    ema: "EMA ePI-readiness",
+    fhir: "HL7 FHIR voor ePI",
+    rim: "Veeva en RIM integratie-readiness",
+    legal: "Juridisch",
+    disclaimer: "Disclaimer",
+    privacy: "Privacybeleid",
+    cookies: "Cookie-instellingen",
+    newsletterBody: "Ontvang het laatste nieuws van Leaphy over ePI in Europa.",
+    rights: "Alle rechten voorbehouden.",
+  },
+  fr: {
+    services: "Services pharma",
+    conversion: "Services de conversion ePI",
+    portfolio: "Conversion portefeuille",
+    ra: "Affaires réglementaires",
+    labeling: "Labeling Operations",
+    hub: "Hub de connaissances ePI",
+    what: "Qu'est-ce que l'ePI ?",
+    ema: "Préparation EMA ePI",
+    fhir: "HL7 FHIR pour ePI",
+    rim: "Préparation intégration Veeva et RIM",
+    legal: "Juridique",
+    disclaimer: "Disclaimer",
+    privacy: "Politique de confidentialité",
+    cookies: "Paramètres cookies",
+    newsletterBody: "Recevez les dernières nouvelles de Leaphy sur l'ePI en Europe.",
+    rights: "Tous droits réservés.",
+  },
+  de: {
+    services: "Pharma Services",
+    conversion: "ePI-Konvertierungsservices",
+    portfolio: "Portfolio-Konvertierung",
+    ra: "Regulatory Affairs",
+    labeling: "Labeling Operations",
+    hub: "ePI Knowledge Hub",
+    what: "Was ist ePI?",
+    ema: "EMA ePI-Readiness",
+    fhir: "HL7 FHIR für ePI",
+    rim: "Veeva und RIM Integrationsreadiness",
+    legal: "Rechtliches",
+    disclaimer: "Disclaimer",
+    privacy: "Datenschutz",
+    cookies: "Cookie-Einstellungen",
+    newsletterBody: "Erhalten Sie Neuigkeiten von Leaphy zu ePI in Europa.",
+    rights: "Alle Rechte vorbehalten.",
+  },
+} as const;
