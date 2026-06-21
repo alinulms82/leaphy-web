@@ -80,7 +80,7 @@ export function HeaderView({ currentPath = "/" }: { currentPath?: string }) {
       )}
     >
       <Container className="flex h-16 items-center justify-between gap-4 lg:h-20">
-        <Logo />
+        <Logo header />
 
         <nav className="hidden items-center gap-6 lg:flex" aria-label="Primary">
           {navItems.map((item, index) => {

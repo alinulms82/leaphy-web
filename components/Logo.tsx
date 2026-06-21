@@ -1,6 +1,12 @@
 import { PortableLink } from "./primitives";
 
-export function Logo({ compact = false }: { compact?: boolean }) {
+export function Logo({
+  compact = false,
+  header = false,
+}: {
+  compact?: boolean;
+  header?: boolean;
+}) {
   return (
     <PortableLink
       href="/"
@@ -11,7 +17,13 @@ export function Logo({ compact = false }: { compact?: boolean }) {
       <img
         src="/images/leaphy-logo.png"
         alt="Leaphy"
-        className={compact ? "h-10 w-auto" : "h-11 w-auto sm:h-12"}
+        className={
+          header
+            ? "h-9 w-auto sm:h-10"
+            : compact
+              ? "h-10 w-auto"
+              : "h-11 w-auto sm:h-12"
+        }
       />
     </PortableLink>
   );
