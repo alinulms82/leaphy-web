@@ -44,9 +44,9 @@ export const ui = {
       response: "We typically respond within one business day.",
       submit: "Send ePI readiness request",
       sending: "Sending...",
-      thanks: "Thanks",
+      thanks: "Thank you for reaching out !",
       received:
-        "We received your ePI readiness request and will get back to you shortly.",
+        "We will try to get back to you as soon as possible. !",
       fallback: "Unable to send request. Please email info@leaphy.com.",
       roles: [
         "Regulatory Affairs",
@@ -97,9 +97,9 @@ export const ui = {
       response: "We reageren doorgaans binnen een werkdag.",
       submit: "Verstuur ePI-readiness aanvraag",
       sending: "Verzenden...",
-      thanks: "Bedankt",
+      thanks: "Thank you for reaching out !",
       received:
-        "We hebben uw ePI-readiness aanvraag ontvangen en nemen binnenkort contact op.",
+        "We will try to get back to you as soon as possible. !",
       fallback: "Kan de aanvraag niet versturen. Mail naar info@leaphy.com.",
       roles: [
         "Regulatory Affairs",
@@ -150,9 +150,9 @@ export const ui = {
       response: "Nous répondons généralement sous un jour ouvrable.",
       submit: "Envoyer la demande ePI",
       sending: "Envoi...",
-      thanks: "Merci",
+      thanks: "Thank you for reaching out !",
       received:
-        "Nous avons reçu votre demande de préparation ePI et reviendrons vers vous prochainement.",
+        "We will try to get back to you as soon as possible. !",
       fallback: "Impossible d'envoyer la demande. Envoyez un e-mail à info@leaphy.com.",
       roles: [
         "Affaires réglementaires",
@@ -203,9 +203,9 @@ export const ui = {
       response: "Wir antworten in der Regel innerhalb eines Werktags.",
       submit: "ePI-Readiness-Anfrage senden",
       sending: "Wird gesendet...",
-      thanks: "Danke",
+      thanks: "Thank you for reaching out !",
       received:
-        "Wir haben Ihre ePI-Readiness-Anfrage erhalten und melden uns in Kürze.",
+        "We will try to get back to you as soon as possible. !",
       fallback: "Anfrage konnte nicht gesendet werden. Bitte senden Sie eine E-Mail an info@leaphy.com.",
       roles: [
         "Regulatory Affairs",

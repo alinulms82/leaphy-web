@@ -18,6 +18,9 @@ type Fields = {
   message: string;
 };
 
+const formSubmitEndpoint = "https://formsubmit.co/ajax/alin@leaphy.com";
+const formSubmitCopyRecipient = "info@leaphy.com";
+
 const empty: Fields = {
   firstName: "",
   lastName: "",
@@ -192,15 +195,21 @@ export function ContactForm({ locale = "en" }: { locale?: Locale }) {
 
     setSubmitting(true);
     try {
-      const response = await fetch("/api/contact", {
+      let response = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(fields),
-      });
+      }).catch(() => null);
 
-      if (!response.ok) {
-        await response.json().catch(() => null);
-        throw new Error(l.unable);
+      if (!response?.ok) {
+        response = await submitToFormSubmit(fields).catch(() => null);
+      }
+
+      if (!response?.ok) {
+        const result = (await response?.json().catch(() => null)) as {
+          error?: string;
+        } | null;
+        throw new Error(result?.error ?? l.unable);
       }
 
       setDone(true);
@@ -217,14 +226,14 @@ export function ContactForm({ locale = "en" }: { locale?: Locale }) {
 
   if (done) {
     return (
-      <div className="rounded-3xl bg-paper-mint p-8 text-center ring-1 ring-brand-100">
-        <div className="mx-auto grid h-12 w-12 place-items-center rounded-full bg-brand-500 text-white">
+      <div className="rounded-3xl bg-white p-8 text-center shadow-soft ring-1 ring-ink/5">
+        <div className="mx-auto grid h-12 w-12 place-items-center rounded-2xl bg-paper-mint text-brand-600 ring-1 ring-brand-100">
           <Check className="h-5 w-5" />
         </div>
-        <h3 className="mt-4 font-display text-2xl text-ink">
-          {t.thanks}, {fields.firstName}.
+        <h3 className="mt-4 text-2xl font-semibold tracking-tight text-ink">
+          {t.thanks}
         </h3>
-        <p className="mt-2 text-sm text-ink/65">
+        <p className="mx-auto mt-2 max-w-md text-sm leading-6 text-ink/65">
           {t.received}
         </p>
       </div>
@@ -390,6 +399,37 @@ export function ContactForm({ locale = "en" }: { locale?: Locale }) {
       </div>
     </form>
   );
+}
+
+function submitToFormSubmit(fields: Fields) {
+  const subject = `Leaphy ePI request: ${fields.company}`;
+  const body = new URLSearchParams();
+
+  body.set("_subject", subject);
+  body.set("_cc", formSubmitCopyRecipient);
+  body.set("_template", "table");
+  body.set("_captcha", "false");
+  body.set("name", `${fields.firstName} ${fields.lastName}`.trim());
+  body.set("email", fields.email);
+  body.set("company", fields.company);
+  body.set("role", fields.role || "-");
+  body.set(
+    "phone",
+    `${fields.phoneCountryCode || ""} ${fields.phone || ""}`.trim() || "-"
+  );
+  body.set("country", fields.country || "-");
+  body.set("portfolio_size", fields.portfolioSize || "-");
+  body.set("interest", fields.interest || "-");
+  body.set("message", fields.message);
+
+  return fetch(formSubmitEndpoint, {
+    method: "POST",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/x-www-form-urlencoded",
+    },
+    body,
+  });
 }
 
 function Field({
