@@ -7,7 +7,7 @@ export const site = {
     "Leaphy is a European digital health technology company helping pharmaceutical organisations prepare for electronic Product Information, ePI. Leaphy supports the AI-assisted transformation of Word and PDF product information into structured, HL7 FHIR-aligned electronic Product Information for EMA ePI readiness, quality control, metadata handling, portfolio conversion, and future interoperability across healthcare systems.",
   url: "https://www.leaphy.com",
   email: "info@leaphy.com",
-  location: "Aalst, Belgium · 20 km from Brussels",
+  location: "Aalst, Brussels · 20 km from Brussels",
   vat: "BE 0711.769.370",
   linkedin: "https://www.linkedin.com/company/leaphy",
   nav: [
