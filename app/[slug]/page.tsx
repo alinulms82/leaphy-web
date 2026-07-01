@@ -5,18 +5,18 @@ import { ArrowRight, CheckCircle2, ExternalLink } from "lucide-react";
 import { AISummaryBlock } from "@/components/AISummaryBlock";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { Container } from "@/components/Container";
-import { CTASection } from "@/components/CTASection";
 import { DefinitionCard, type DefinitionTerm } from "@/components/DefinitionCard";
 import { EntitySummary } from "@/components/EntitySummary";
 import { FAQ, FAQSection, InlineLink } from "@/components/FAQSection";
 import { JsonLd } from "@/components/JsonLd";
-import { PortableLink } from "@/components/primitives";
+import { PortableImage, PortableLink } from "@/components/primitives";
 import { aisoSlugs, getAisoPage, pageUrl } from "@/lib/aiso";
 import { localizeAisoPage, localizedCoreLinks, localizedFaqs } from "@/lib/aiso-i18n";
 import { getLocale, ui } from "@/lib/i18n";
 import { site } from "@/lib/site";
 
 type Params = { slug: string };
+const APP_STORE_URL = "https://apps.apple.com/dk/app/leaphy/id1452095084";
 
 export function generateStaticParams() {
   return aisoSlugs.map((slug) => ({ slug }));
@@ -82,30 +82,34 @@ export default function AisoPage({
             homeLabel={labels.home}
             items={[{ name: page.h1, href: `/${page.slug}` }]}
           />
-          <div className="mt-8 max-w-4xl">
-            <h1 className="text-4xl font-semibold tracking-tight text-ink sm:text-5xl">
-              {page.h1}
-            </h1>
-            <p className="mt-6 max-w-3xl text-lg leading-8 text-slate-700">
-              {page.directAnswer}
-            </p>
-            <div className="mt-8 flex flex-wrap gap-3">
-              <PortableLink
-                href={locale === "en" ? "/contact" : `/contact?lang=${locale}`}
-                className="btn-primary"
-                data-cta="portfolio-assessment"
-              >
-                {localizedCta(locale).primary}
-                <ArrowRight className="h-4 w-4" />
-              </PortableLink>
-              <PortableLink
-                href={locale === "en" ? "/contact" : `/contact?lang=${locale}`}
-                className="btn-secondary"
-                data-cta="pilot-conversion"
-              >
-                {localizedCta(locale).secondary}
-              </PortableLink>
+          <div className={page.slug === "app-and-patient-access" ? "mt-8 grid items-center gap-10 lg:grid-cols-[minmax(0,1fr)_360px]" : "mt-8 max-w-4xl"}>
+            <div className="max-w-4xl">
+              <h1 className="text-4xl font-semibold tracking-tight text-ink sm:text-5xl">
+                {page.h1}
+              </h1>
+              <p className="mt-6 max-w-3xl text-lg leading-8 text-slate-700">
+                {page.directAnswer}
+              </p>
+              <div className="mt-8 flex flex-wrap gap-3">
+                <PortableLink
+                  href={locale === "en" ? "/contact" : `/contact?lang=${locale}`}
+                  className="btn-primary"
+                  data-cta="portfolio-assessment"
+                >
+                  {localizedCta(locale).primary}
+                  <ArrowRight className="h-4 w-4" />
+                </PortableLink>
+                <PortableLink
+                  href={locale === "en" ? "/contact" : `/contact?lang=${locale}`}
+                  className="btn-secondary"
+                  data-cta="pilot-conversion"
+                >
+                  {localizedCta(locale).secondary}
+                </PortableLink>
+              </div>
             </div>
+
+            {page.slug === "app-and-patient-access" && <AppStoreImageCta />}
           </div>
           <div className="mt-10 max-w-5xl">
             <AISummaryBlock bullets={page.keyFacts} title={t.overview} />
@@ -226,13 +230,93 @@ export default function AisoPage({
         </Container>
       </main>
 
-      <CTASection
-        title={localizedCta(locale).title}
-        description={localizedCta(locale).description}
-        ctaPrimary={{ href: locale === "en" ? "/contact" : `/contact?lang=${locale}`, label: localizedCta(locale).primary }}
-        ctaSecondary={{ href: locale === "en" ? "/contact" : `/contact?lang=${locale}`, label: localizedCta(locale).secondary }}
-      />
+      <PortfolioCta locale={locale} />
     </>
+  );
+}
+
+function PortfolioCta({ locale }: { locale: ReturnType<typeof getLocale> }) {
+  const cta = localizedCta(locale);
+  const href = locale === "en" ? "/contact" : `/contact?lang=${locale}`;
+
+  return (
+    <section className="bg-slate-50 py-16 sm:py-24">
+      <Container>
+        <div className="rounded-lg border border-slate-200 bg-[#071B33] p-6 text-white shadow-soft sm:p-10">
+          <div className="max-w-3xl">
+            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-cyan-200">
+              {cta.eyebrow}
+            </p>
+            <h2 className="mt-3 text-3xl font-semibold tracking-tight text-white sm:text-4xl">
+              {cta.title}
+            </h2>
+            <p className="mt-4 text-base leading-7 text-slate-200">
+              {cta.description}
+            </p>
+            <div className="mt-8 flex flex-wrap gap-3">
+              <PortableLink
+                href={href}
+                className="inline-flex items-center gap-2 rounded-full bg-white px-5 py-3 text-sm font-semibold text-[#071B33] transition hover:bg-cyan-100"
+                data-cta="portfolio-assessment"
+              >
+                {cta.primary}
+                <ArrowRight className="h-4 w-4" />
+              </PortableLink>
+              <PortableLink
+                href={href}
+                className="inline-flex items-center gap-2 rounded-full border border-white/20 px-5 py-3 text-sm font-semibold text-white transition hover:bg-white/10"
+                data-cta="pilot-conversion"
+              >
+                {cta.secondary}
+              </PortableLink>
+            </div>
+          </div>
+        </div>
+      </Container>
+    </section>
+  );
+}
+
+function AppStoreImageCta() {
+  return (
+    <div className="space-y-4">
+      <PortableLink
+        href={APP_STORE_URL}
+        target="_blank"
+        rel="noreferrer"
+        aria-label="Open the Leaphy app in the Apple App Store"
+        className="group block overflow-hidden rounded-2xl bg-white shadow-soft ring-1 ring-slate-200 transition hover:-translate-y-0.5 hover:shadow-glow focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand-500"
+        data-cta="app-store-image"
+      >
+        <span className="relative block aspect-[4/5]">
+          <PortableImage
+            src="/images/hero-scan.webp"
+            alt="Leaphy app scanning a medication pack"
+            className="absolute inset-0 h-full w-full object-cover transition duration-500 group-hover:scale-105"
+            eager
+          />
+          <span
+            className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#071B33]/70 via-transparent to-transparent"
+            aria-hidden="true"
+          />
+        </span>
+      </PortableLink>
+      <PortableLink
+        href={APP_STORE_URL}
+        target="_blank"
+        rel="noreferrer"
+        aria-label="Download Leaphy on the App Store"
+        className="block w-fit transition hover:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand-500"
+        data-cta="app-store-badge"
+      >
+        <PortableImage
+          src="/images/download-on-the-app-store.svg"
+          alt="Download on the App Store"
+          className="h-12 w-auto"
+          eager
+        />
+      </PortableLink>
+    </div>
   );
 }
 
@@ -304,6 +388,7 @@ function pageLabels(locale: ReturnType<typeof getLocale>) {
 function localizedCta(locale: ReturnType<typeof getLocale>) {
   return {
     en: {
+      eyebrow: "Portfolio conversation",
       primary: "Request an ePI readiness assessment",
       secondary: "Discuss a pilot conversion",
       title: "Talk to Leaphy about your portfolio",
@@ -311,6 +396,7 @@ function localizedCta(locale: ReturnType<typeof getLocale>) {
         "Request an ePI readiness assessment, discuss a pilot conversion, or plan a strategic portfolio roadmap with a team focused on pharma ePI enablement.",
     },
     nl: {
+      eyebrow: "Portfoliogesprek",
       primary: "Vraag een ePI-readiness assessment aan",
       secondary: "Bespreek een pilotconversie",
       title: "Praat met Leaphy over uw portfolio",
@@ -318,6 +404,7 @@ function localizedCta(locale: ReturnType<typeof getLocale>) {
         "Vraag een ePI-readiness assessment aan, bespreek een pilotconversie of plan een strategische portfolioroadmap.",
     },
     fr: {
+      eyebrow: "Conversation portefeuille",
       primary: "Demander une évaluation ePI",
       secondary: "Discuter d'une conversion pilote",
       title: "Parlez à Leaphy de votre portefeuille",
@@ -325,6 +412,7 @@ function localizedCta(locale: ReturnType<typeof getLocale>) {
         "Demandez une évaluation ePI, discutez d'une conversion pilote ou planifiez une roadmap stratégique de portefeuille.",
     },
     de: {
+      eyebrow: "Portfolio-Gespraech",
       primary: "ePI-Readiness Assessment anfragen",
       secondary: "Pilotkonvertierung besprechen",
       title: "Sprechen Sie mit Leaphy über Ihr Portfolio",

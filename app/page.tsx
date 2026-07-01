@@ -10,15 +10,18 @@ import {
   FileText,
   GitBranch,
   Layers,
+  Languages,
   Network,
+  QrCode,
   ShieldCheck,
+  Smartphone,
 } from "lucide-react";
 import { AISummaryBlock } from "@/components/AISummaryBlock";
 import { Container } from "@/components/Container";
 import { ContactForm } from "@/components/ContactForm";
 import { EntitySummary } from "@/components/EntitySummary";
 import { JsonLd } from "@/components/JsonLd";
-import { PortableLink } from "@/components/primitives";
+import { PortableImage, PortableLink } from "@/components/primitives";
 import { localizedCoreLinks } from "@/lib/aiso-i18n";
 import { getLocale, home, homeSections, ui, type Locale } from "@/lib/i18n";
 import { site } from "@/lib/site";
@@ -65,6 +68,8 @@ const solutionCards = [
   GitBranch,
   ShieldCheck,
 ] as const;
+
+const APP_STORE_URL = "https://apps.apple.com/dk/app/leaphy/id1452095084";
 
 export default function HomePage({
   searchParams,
@@ -224,6 +229,7 @@ export default function HomePage({
 
       <ComparisonSection locale={locale} />
       <EngagementSection locale={locale} />
+      <AppAwarenessSection locale={locale} />
       <ValueSection locale={locale} />
       <VisionSection locale={locale} />
       <TrustSection locale={locale} />
@@ -440,6 +446,106 @@ function EngagementSection({ locale }: { locale: Locale }) {
               </PortableLink>
             </article>
           ))}
+        </div>
+      </Container>
+    </section>
+  );
+}
+
+function AppAwarenessSection({ locale }: { locale: Locale }) {
+  const app = homeSections[locale].appCta;
+  const highlightIcons = [QrCode, FileText, Languages] as const;
+
+  return (
+    <section className="bg-[#071B33] py-16 text-white sm:py-24">
+      <Container className="grid items-center gap-10 lg:grid-cols-[minmax(0,1fr)_420px]">
+        <div>
+          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-cyan-200">
+            {app.eyebrow}
+          </p>
+          <h2 className="mt-3 max-w-3xl text-3xl font-semibold tracking-tight text-white sm:text-4xl">
+            {app.title}
+          </h2>
+          <p className="mt-4 max-w-2xl text-base leading-7 text-slate-200">
+            {app.body}
+          </p>
+
+          <div className="mt-8 flex flex-wrap items-center gap-3">
+            <PortableLink
+              href={localizedPath("/app-and-patient-access", locale)}
+              className="inline-flex items-center gap-2 rounded-full bg-white px-5 py-3 text-sm font-semibold text-[#071B33] transition hover:bg-cyan-100"
+              data-cta="leaphy-app-awareness"
+            >
+              {app.primary}
+              <ArrowRight className="h-4 w-4" />
+            </PortableLink>
+            <span className="inline-flex items-center gap-2 rounded-full border border-white/15 px-4 py-3 text-sm font-semibold text-cyan-100">
+              <Smartphone className="h-4 w-4" />
+              {app.secondary}
+            </span>
+            <PortableLink
+              href={APP_STORE_URL}
+              target="_blank"
+              rel="noreferrer"
+              aria-label="Download Leaphy on the App Store"
+              className="inline-flex transition hover:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-cyan-200"
+              data-cta="app-section-app-store-badge"
+            >
+              <PortableImage
+                src="/images/download-on-the-app-store.svg"
+                alt="Download on the App Store"
+                className="h-12 w-auto"
+                eager
+              />
+            </PortableLink>
+          </div>
+
+          <div className="mt-8 grid gap-3 sm:grid-cols-3">
+            {app.highlights.map((item, index) => {
+              const Icon = highlightIcons[index];
+              return (
+                <div key={item} className="flex items-center gap-3 rounded-lg border border-white/10 bg-white/5 p-4">
+                  <span className="grid h-9 w-9 shrink-0 place-items-center rounded-md bg-cyan-200/10 text-cyan-100">
+                    <Icon className="h-4 w-4" />
+                  </span>
+                  <p className="text-sm font-semibold text-white">{item}</p>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+
+        <div className="mx-auto w-full max-w-sm">
+          <div className="rounded-[2rem] border border-white/15 bg-white/10 p-3 shadow-2xl">
+            <div className="overflow-hidden rounded-[1.45rem] bg-white text-[#071B33]">
+              <div className="relative aspect-[4/5]">
+                <PortableImage
+                  src="/images/hero-scan.webp"
+                  alt="Leaphy app scanning a medication pack"
+                  className="absolute inset-0 h-full w-full object-cover"
+                />
+                <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-[#071B33] via-[#071B33]/65 to-transparent p-5 pt-20 text-white">
+                  <div className="inline-flex items-center gap-2 rounded-full bg-cyan-200 px-3 py-1 text-xs font-semibold text-[#071B33]">
+                    <QrCode className="h-3.5 w-3.5" />
+                    {app.scanLabel}
+                  </div>
+                  <p className="mt-3 text-lg font-semibold">
+                    {app.phoneBody}
+                  </p>
+                </div>
+              </div>
+              <div className="grid grid-cols-3 divide-x divide-slate-200 border-t border-slate-200">
+                {app.stats.map(([value, label]) => (
+                  <div key={label} className="p-4">
+                    <p className="text-lg font-semibold text-ink">{value}</p>
+                    <p className="mt-1 text-[11px] leading-4 text-slate-500">
+                      {label}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
         </div>
       </Container>
     </section>
