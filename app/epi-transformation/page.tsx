@@ -75,7 +75,7 @@ export default function EpiPage() {
                   "patients struggle to read paper leaflets due to font size and density.",
               },
               {
-                stat: "24",
+                stat: "26",
                 label:
                   "official EU languages — ePI keeps every translation perfectly in sync.",
               },

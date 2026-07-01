@@ -69,7 +69,7 @@ export const site = {
   ],
   stats: [
     { value: "27", label: "EU countries supported" },
-    { value: "24", label: "European languages" },
+    { value: "26", label: "European languages" },
     { value: "100%", label: "Free for patients" },
     { value: "FMD · IDMP", label: "Compliance ready" },
   ],

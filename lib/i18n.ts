@@ -406,7 +406,7 @@ export const homeSections = {
       ],
       stats: [
         ["2D", "Matrix / barcode scanning"],
-        ["24", "European languages"],
+        ["26", "European languages"],
         ["Free", "For patients and HCPs"],
       ],
     },
@@ -514,7 +514,7 @@ export const homeSections = {
       scanLabel: "Scan naar bijsluiter",
       phoneBody: "Gestructureerde geneesmiddeleninformatie, rechtstreeks vanaf de verpakking.",
       highlights: ["Scan de verpakking", "Lees gestructureerde ePI", "Wissel van taal"],
-      stats: [["2D", "Matrix / barcode-scanning"], ["24", "Europese talen"], ["Gratis", "Voor patiënten en zorgverleners"]],
+      stats: [["2D", "Matrix / barcode-scanning"], ["26", "Europese talen"], ["Gratis", "Voor patiënten en zorgverleners"]],
     },
     value: {
       eyebrow: "App & toegang",
@@ -598,7 +598,7 @@ export const homeSections = {
       scanLabel: "Scanner vers la notice",
       phoneBody: "Information médicament structurée, directement depuis l'emballage.",
       highlights: ["Scanner l'emballage", "Lire l'ePI structurée", "Changer de langue"],
-      stats: [["2D", "Scan Matrix / code-barres"], ["24", "Langues européennes"], ["Gratuit", "Pour patients et professionnels"]],
+      stats: [["2D", "Scan Matrix / code-barres"], ["26", "Langues européennes"], ["Gratuit", "Pour patients et professionnels"]],
     },
     value: {
       eyebrow: "App & accès",
@@ -682,7 +682,7 @@ export const homeSections = {
       scanLabel: "Zur Packungsbeilage scannen",
       phoneBody: "Strukturierte Arzneimittelinformation direkt von der Packung.",
       highlights: ["Packung scannen", "Strukturierte ePI lesen", "Sprache wechseln"],
-      stats: [["2D", "Matrix / Barcode-Scan"], ["24", "Europäische Sprachen"], ["Kostenlos", "Für Patienten und HCPs"]],
+      stats: [["2D", "Matrix / Barcode-Scan"], ["26", "Europäische Sprachen"], ["Kostenlos", "Für Patienten und HCPs"]],
     },
     value: {
       eyebrow: "App & Zugang",
